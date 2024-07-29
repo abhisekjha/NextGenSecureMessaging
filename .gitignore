@@ -1,4 +1,3 @@
-#ignore venv, pycache, and pyky folder
+#ignore venv and pyky folder
 venv/
-__pycache__/
 pyky/
