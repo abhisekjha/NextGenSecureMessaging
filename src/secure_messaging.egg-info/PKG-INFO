@@ -1,0 +1,115 @@
+Metadata-Version: 2.1
+Name: secure_messaging
+Version: 0.1.0
+Summary: A secure messaging system using AES-256 and Kyber
+Home-page: https://github.com/abhisekjha/pqc_aes_multipath
+Author: Abhisek Jha
+Author-email: abhisekjha2020@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: pqcrypto
+Requires-Dist: pycryptodome
+Requires-Dist: pyky
+
+# Secure Messaging with Kyber and AES-256
+
+This project demonstrates how to securely encrypt packets of messages using AES-256, with the AES session keys being securely exchanged using Kyber, a post-quantum cryptographic algorithm. The process ensures that the encrypted messages are protected against both classical and quantum attacks.
+
+## Process Overview
+
+### Key Generation
+- Generate a pair of public and private keys for the recipient using Kyber.
+
+### Encrypting Session Key
+- For each message, generate a 256-bit AES session key.
+- Encrypt the AES session key using the recipient's Kyber public key.
+
+### Encrypting Messages
+- Encrypt the message using AES-256 with the generated session key.
+
+### Storing Encrypted Data
+- Store the encrypted session key and the encrypted message together in a file.
+
+### Decrypting Session Key
+- The recipient decrypts the AES session key using their Kyber private key.
+
+### Decrypting Messages
+- The recipient uses the decrypted AES session key to decrypt the message.
+
+## Flowchart
+
+```plaintext
++-----------------------+
+| Generate Kyber Keys   |
+| (Public & Private)    |
++-----------------------+
+           |
+           V
++-----------------------+
+| For each message:     |
+| 1. Generate AES-256   |
+|    session key        |
+| 2. Encrypt session key|
+|    with Kyber         |
++-----------------------+
+           |
+           V
++-----------------------+
+| Encrypt message using |
+| AES-256 with session  |
+| key                   |
++-----------------------+
+           |
+           V
++-----------------------+
+| Store encrypted session|
+| key and encrypted      |
+| message in a file      |
++-----------------------+
+           |
+           V
++-----------------------+
+| For decryption:       |
+| 1. Decrypt session key|
+|    with Kyber         |
+| 2. Decrypt message    |
+|    with AES-256 using |
+|    session key        |
++-----------------------+
+```
+
+### Usage
+- Place your binary message files in the encoded folder.
+- Run the script script.py:
+``` python script.py ```
+- Encrypted files will be saved in the encrypted folder.
+- The decryption example at the end of the script demonstrates how to decrypt the files.
+
+
+### Explanation
+## Key Generation
+- Use Kyber to generate a public/private key pair for the recipient. The public key is used to encrypt the session keys, while the private key is used to decrypt them.
+
+## Encrypting the Session Key
+- For each message file, generate a random 256-bit AES session key.
+Use the recipient's Kyber public key to encrypt this AES session key, creating an encapsulated session key that can be safely transmitted.
+
+## Encrypting the Message
+- Encrypt the message content with AES-256 using the generated session key. AES-256 ensures the message is encrypted with strong, symmetric encryption.
+
+## Storing the Encrypted Data
+- Combine the encrypted session key and the AES-encrypted message into a single file. This file is stored or transmitted securely.
+
+## Decrypting the Session Key
+- The recipient receives the file, extracts the encrypted session key, and uses their Kyber private key to decrypt the session key.
+
+## Decrypting the Message
+- With the decrypted AES session key, the recipient decrypts the message content to retrieve the original message.
+
+
+This script ensures the secure encryption and decryption of messages using a combination of Kyber and AES-256, providing strong security against both current and future threats.
+
+

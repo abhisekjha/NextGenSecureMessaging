@@ -1,0 +1,3 @@
+[console_scripts]
+decrypt_files = scripts.decrypt_files:main
+encrypt_files = scripts.encrypt_files:main

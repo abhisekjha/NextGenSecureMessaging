@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Messaging System</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #007bff;
+        }
+        .flowchart {
+            text-align: center;
+            font-family: monospace;
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .media-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            margin-top: 20px; 
+        }
+        .px-4 {
+            padding-left: 16px; 
+            padding-right: 16px;
+        }
+        .media-icons a {
+            color: #121010;
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+        .media-icons a:hover {
+            color: #b27805a5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Secure Messaging System</h1>
+        <p class="lead">This document explains the process of encrypting messages using AES-256 and securing the keys with Kyber, a post-quantum cryptographic algorithm.</p>
+        
+        <div class="media-icons">
+            <a href="https://github.com/abhisekjha/pqc_aes_multipath" target="_blank" class="px-4">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        <h2>Overview</h2>
+        <p>The goal is to securely encrypt packets of messages (binary files) using AES-256, with the AES session keys being securely exchanged using Kyber. This ensures robust security against both current and future cryptographic threats.</p>
+
+        <h2>Steps</h2>
+        <ol>
+            <li><strong>Key Generation:</strong> Generate a pair of public and private keys for the recipient using Kyber.</li>
+            <li><strong>Encrypting Session Key:</strong> For each message, generate a 256-bit session key and encrypt the key using the recipient's Kyber public key.</li>
+            <li><strong>Encrypting Messages:</strong> Encrypt the message using AES-256 with the generated session key.</li>
+            <li><strong>Storing Encrypted Data:</strong> Store the encrypted session key and the encrypted message together in a file.</li>
+            <li><strong>Decrypting Session Key:</strong> The recipient decrypts the AES session key using their Kyber private key.</li>
+            <li><strong>Decrypting Messages:</strong> The recipient uses the decrypted AES session key to decrypt the message.</li>
+        </ol>
+
+        <h2>Flowchart</h2>
+        <div class="flowchart">
+            +-----------------------+<br>
+            | Generate Kyber Keys   |<br>
+            | (Public & Private)    |<br>
+            +-----------------------+<br>
+                       |<br>
+                       V<br>
+            +-----------------------+<br>
+            | For each message:     |<br>
+            | 1. Encrypt session key|<br>
+            |    with Kyber         |<br>
+            +-----------------------+<br>
+                       |<br>
+                       V<br>
+            +-----------------------+<br>
+            | Encrypt message using |<br>
+            | AES-256 with session  |<br>
+            | key                   |<br>
+            +-----------------------+<br>
+                       |<br>
+                       V<br>
+            +-----------------------+<br>
+            | Store encrypted session|<br>
+            | key and encrypted      |<br>
+            | message in a file      |<br>
+            +-----------------------+<br>
+                       |<br>
+                       V<br>
+            +-----------------------+<br>
+            | For decryption:       |<br>
+            | 1. Decrypt session key|<br>
+            |    with Kyber         |<br>
+            | 2. Decrypt message    |<br>
+            |    with AES-256 using |<br>
+            |    session key        |<br>
+            +-----------------------+
+        </div>
+
+        <h2>Detailed Explanation</h2>
+        <p>The process ensures that the message is encrypted securely and can only be decrypted by the intended recipient, leveraging the strengths of both Kyber and AES-256 to secure messages effectively.</p>
+
+        <h3>Key Generation</h3>
+        <p>Use Kyber to generate a public/private key pair for the recipient. The public key is used to encrypt encryption, the private key is used to decrypt them.</p>
+
+        <h3>Encrypting the Session Key</h3>
+        <p>For each message file, generate a random 256-bit AES session key. Use the recipient's Kyber public key to encrypt this AES session key, creating an encapsulated session key that can be safely transmitted.</p>
+
+        <h3>Encrypting the Message</h3>
+        <p>Encrypt the message content with AES-256 using the generated session key. AES-256 ensures the message is encrypted with strong, symmetric encryption.</p>
+
+        <h3>Storing the Encrypted Data</h3>
+        <p>Combine the encrypted session key and the AES-encrypted message into a single file. This file is stored or transmitted securely.</p>
+
+        <h3>Decrypting the Session Key</h3>
+        <p>The recipient receives the file, extracts the encrypted session key, and uses their Kyber private key to decrypt the session key.</p>
+
+        <h3>Decrypting the Message</h3>
+        <p>With the decrypted AES session key, the recipient decrypts the message content to retrieve the original message.</p>
+
+        <h2>Conclusion</h2>
+        <p>This process ensures secure key exchange using Kyber and message encryption using AES-256, following best practices for cryptographic security.</p>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
