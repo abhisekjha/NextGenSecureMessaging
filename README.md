@@ -93,6 +93,14 @@ export PYTHONPATH=/path/to/pqc_aes_multipath:/path/to/pqc_aes_multipath/pyky
 echo $PYTHONPATH
 ```
 
+6. Set the JAVA_HOME to other version()
+```
+export JAVA_HOME=`/usr/libexec/java_home -v 11`
+export PATH=$JAVA_HOME/bin:$PATH
+
+```
+
+
 6. Install requirements.txt
 ```
 pip install -r requirements.txt

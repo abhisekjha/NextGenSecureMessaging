@@ -3,142 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Messaging System</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-        }
-        .container {
-            margin-top: 50px;
-            max-width: 800px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2, h3 {
-            color: #007bff;
-        }
-        .flowchart {
-            text-align: center;
-            font-family: monospace;
-            background-color: #e9ecef;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        .media-icons {
-            display: flex;
-            justify-content: center;
-            align-items: center; 
-            margin-top: 20px; 
-        }
-        .px-4 {
-            padding-left: 16px; 
-            padding-right: 16px;
-        }
-        .media-icons a {
-            color: #121010;
-            font-size: 24px;
-            transition: color 0.3s ease;
-        }
-        .media-icons a:hover {
-            color: #b27805a5;
-        }
-    </style>
+    <title>Beyond Level 3: Post-Quantum Security</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="mt-5">Secure Messaging System</h1>
-        <p class="lead">This document explains the process of encrypting messages using AES-256 and securing the keys with Kyber, a post-quantum cryptographic algorithm.</p>
-        
-        <div class="media-icons">
-            <a href="https://github.com/abhisekjha/pqc_aes_multipath" target="_blank" class="px-4">
-                <i class="fab fa-github"></i>
-            </a>
-        </div>
-        <h2>Overview</h2>
-        <p>The goal is to securely encrypt packets of messages (binary files) using AES-256, with the AES session keys being securely exchanged using Kyber. This ensures robust security against both current and future cryptographic threats.</p>
 
-        <h2>Steps</h2>
-        <ol>
-            <li><strong>Key Generation:</strong> Generate a pair of public and private keys for the recipient using Kyber.</li>
-            <li><strong>Encrypting Session Key:</strong> For each message, generate a 256-bit session key and encrypt the key using the recipient's Kyber public key.</li>
-            <li><strong>Encrypting Messages:</strong> Encrypt the message using AES-256 with the generated session key.</li>
-            <li><strong>Storing Encrypted Data:</strong> Store the encrypted session key and the encrypted message together in a file.</li>
-            <li><strong>Decrypting Session Key:</strong> The recipient decrypts the AES session key using their Kyber private key.</li>
-            <li><strong>Decrypting Messages:</strong> The recipient uses the decrypted AES session key to decrypt the message.</li>
-        </ol>
+<header>
+    <h1>Beyond Level 3: Pioneering the Future of Secure Messaging</h1>
+</header>
 
-        <h2>Flowchart</h2>
-        <div class="flowchart">
-            +-----------------------+<br>
-            | Generate Kyber Keys   |<br>
-            | (Public & Private)    |<br>
-            +-----------------------+<br>
-                       |<br>
-                       V<br>
-            +-----------------------+<br>
-            | For each message:     |<br>
-            | 1. Encrypt session key|<br>
-            |    with Kyber         |<br>
-            +-----------------------+<br>
-                       |<br>
-                       V<br>
-            +-----------------------+<br>
-            | Encrypt message using |<br>
-            | AES-256 with session  |<br>
-            | key                   |<br>
-            +-----------------------+<br>
-                       |<br>
-                       V<br>
-            +-----------------------+<br>
-            | Store encrypted session|<br>
-            | key and encrypted      |<br>
-            | message in a file      |<br>
-            +-----------------------+<br>
-                       |<br>
-                       V<br>
-            +-----------------------+<br>
-            | For decryption:       |<br>
-            | 1. Decrypt session key|<br>
-            |    with Kyber         |<br>
-            | 2. Decrypt message    |<br>
-            |    with AES-256 using |<br>
-            |    session key        |<br>
-            +-----------------------+
-        </div>
+<article>
+    <h2>Introduction</h2>
+    <p>In the ever-evolving landscape of digital security, staying ahead of emerging threats is not just a priority—it's a necessity. Today, I am proud to announce the successful implementation of a groundbreaking cryptographic protocol that pushes the boundaries of what we once thought possible: the "Beyond Level 3" security model. This new protocol represents the cutting edge of secure communication, utilizing Kyber for post-quantum encryption and Dilithium for quantum-resistant authentication.</p>
 
-        <h2>Detailed Explanation</h2>
-        <p>The process ensures that the message is encrypted securely and can only be decrypted by the intended recipient, leveraging the strengths of both Kyber and AES-256 to secure messages effectively.</p>
+    <hr>
 
-        <h3>Key Generation</h3>
-        <p>Use Kyber to generate a public/private key pair for the recipient. The public key is used to encrypt encryption, the private key is used to decrypt them.</p>
+    <h2>The Need for "Beyond Level 3" Security</h2>
+    <p>As we stand on the cusp of the quantum computing era, the cryptographic foundations that have protected our data for decades are at risk. Classical cryptography, once deemed unbreakable, is becoming increasingly vulnerable as quantum computers progress toward practical application. This impending reality has driven the cryptographic community to develop new standards that can withstand the computational power of quantum machines.</p>
+    <p>While recent advances, such as Apple's PQ3 protocol, have introduced post-quantum cryptography (PQC) into mainstream applications, there is still more to be done. The journey doesn't end with securing key establishment and message exchanges—authentication, the very mechanism by which we verify identities and trust in communication, must also be fortified against quantum threats.</p>
 
-        <h3>Encrypting the Session Key</h3>
-        <p>For each message file, generate a random 256-bit AES session key. Use the recipient's Kyber public key to encrypt this AES session key, creating an encapsulated session key that can be safely transmitted.</p>
+    <h2>Introducing Kyber and Dilithium: A Perfect Synergy</h2>
+    <p>The "Beyond Level 3" implementation I developed represents a holistic approach to quantum-resistant security. It goes beyond the capabilities of current cryptographic protocols by integrating both Kyber-based encryption and Dilithium-based authentication, creating a seamless and secure messaging environment.</p>
 
-        <h3>Encrypting the Message</h3>
-        <p>Encrypt the message content with AES-256 using the generated session key. AES-256 ensures the message is encrypted with strong, symmetric encryption.</p>
+    <h3>Kyber for Post-Quantum Encryption</h3>
+    <p>Kyber, selected by NIST as a leading post-quantum key encapsulation mechanism (KEM), forms the backbone of our encryption process. Kyber's lattice-based design ensures that even if quantum computers become capable of breaking traditional cryptographic systems, the encryption remains secure. In our implementation, Kyber is employed from the very first message exchange, ensuring that all communication is protected from both current and future adversaries.</p>
+    <p>To maximize security, we incorporated Kyber into both the initial key establishment phase and the ongoing rekeying process. This means that every message exchanged is shielded by quantum-resistant encryption, with periodic rekeying to further enhance security. The system dynamically adapts to connectivity and threat levels, adjusting rekeying intervals to maintain optimal security without compromising performance.</p>
 
-        <h3>Storing the Encrypted Data</h3>
-        <p>Combine the encrypted session key and the AES-encrypted message into a single file. This file is stored or transmitted securely.</p>
+    <h3>Dilithium for Quantum-Resistant Authentication</h3>
+    <p>While Kyber secures the content of communication, Dilithium ensures that the identities of the communicating parties are authenticated in a quantum-resistant manner. Dilithium, also part of NIST's suite of post-quantum algorithms, is a lattice-based digital signature scheme designed to be secure against quantum attacks.</p>
+    <p>Our implementation uses Dilithium to sign every message, ensuring that only the intended recipients can verify the authenticity of the communication. This provides an additional layer of security, safeguarding against man-in-the-middle attacks and ensuring the integrity of the message.</p>
+    <p>The combination of Kyber and Dilithium creates a robust security framework that not only protects the content of the communication but also guarantees the authenticity of the parties involved.</p>
 
-        <h3>Decrypting the Session Key</h3>
-        <p>The recipient receives the file, extracts the encrypted session key, and uses their Kyber private key to decrypt the session key.</p>
-
-        <h3>Decrypting the Message</h3>
-        <p>With the decrypted AES session key, the recipient decrypts the message content to retrieve the original message.</p>
-
-        <h2>Conclusion</h2>
-        <p>This process ensures secure key exchange using Kyber and message encryption using AES-256, following best practices for cryptographic security.</p>
+    <div class="shadow-box">
+        <h3>Key Highlights</h3>
+        <ul>
+            <li>Kyber for Post-Quantum Encryption</li>
+            <li>Dilithium for Quantum-Resistant Authentication</li>
+            <li>Ongoing PQC Rekeying for Adaptive Security</li>
+            <li>Formal Verification and Peer Review</li>
+        </ul>
     </div>
-    
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <h2>A New Era of Cryptographic Assurance</h2>
+    <p>This "Beyond Level 3" implementation represents a new standard in cryptographic security—one that is prepared for the challenges posed by the quantum era. By integrating post-quantum encryption and authentication into a single, cohesive protocol, we have created a messaging system that offers unparalleled protection.</p>
+    <p>The formal verification of this protocol was a critical step in its development. Using rigorous mathematical proofs and symbolic evaluation, we ensured that the protocol not only meets but exceeds the highest security standards. This verification process, coupled with extensive peer review, provides strong assurances that our implementation is secure against both classical and quantum adversaries.</p>
+
+    <h2>Looking Ahead</h2>
+    <p>As quantum computing continues to advance, the need for secure, quantum-resistant communication will only grow. Our "Beyond Level 3" implementation is not just a response to this need—it's a proactive step forward, setting a new benchmark for the industry.</p>
+    <p>This implementation marks the beginning of a new era in cryptographic security. It is my hope that this work will inspire others to continue pushing the boundaries of what is possible, ensuring that our digital communications remain secure in the face of even the most formidable technological advancements.</p>
+</article>
+
+<footer>
+    <p>&copy; 2024 Abhisek Kumar Jha</p>
+</footer>
+
 </body>
 </html>

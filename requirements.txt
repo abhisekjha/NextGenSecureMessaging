@@ -1,3 +1,10 @@
+build
+cffi
+JPype1
+packaging
 pqcrypto
+pycparser
 pycryptodome
+pyproject_hooks
 setuptools
+tqdm

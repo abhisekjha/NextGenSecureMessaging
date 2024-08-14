@@ -1,3 +1,4 @@
-#ignore venv and pyky folder
+#ignore venv, dilithium-java, and pyky folder
 venv/
 pyky/
+dilithium-java/
