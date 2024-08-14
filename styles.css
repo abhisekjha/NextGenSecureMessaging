@@ -71,3 +71,12 @@ footer {
         font-size: 16px;
     }
 }
+.intro-image {
+    max-width: 110%; /* Ensures the image scales within its container */
+    height: auto; /* Maintains the aspect ratio */
+    float: left; /* Floats the image to the left of the text */
+    margin-right: 10px; /* Adds space between the image and the text */
+    margin-left: -5px; /* Adds space between the image and the left edge of the container */;
+    margin-bottom: 10px; /* Adds space below the image */
+    border-radius: 8px; /* Adds rounded corners to the image */
+}
