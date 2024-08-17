@@ -1,30 +1,50 @@
 import jpype
 import jpype.imports
 from jpype.types import *
+from jpype import JClass
 
-# Path to the JAR file
-classpath = '/Users/abhisekjha/MyFolder/Github_Projects/NextGenSecureMessaging/dilithium-java/'
+# Ensure you specify the correct path to the .jar file that contains the Dilithium implementation
+jar_path = "/Users/abhisekjha/MyFolder/Github_Projects/NextGenSecureMessaging/dilithium-java/target/dilithium-java-0.0.1-SNAPSHOT.jar"
 
-# # Manually specify the JVM path (using JAVA_HOME)
-# jvm_path = f'{os.environ["JAVA_HOME"]}/jre/lib/server/libjvm.dylib'
+try:
+    # Start JVM
+    jpype.startJVM(jpype.getDefaultJVMPath(), "-ea", f"-Djava.class.path={jar_path}")
+    
+    # Import Java classes directly related to the cryptography features
+    Dilithium = JClass("net.thiim.dilithium.impl.Dilithium")
+    DilithiumParameterSpec = JClass("net.thiim.dilithium.interfaces.DilithiumParameterSpec")
+    KeyPair = JClass("java.security.KeyPair")
+    Signature = JClass("java.security.Signature")
 
-# # Print JVM path to verify it's correct
-# print(f"JVM Path: {jvm_path}")
+    # Assume that we need a specification for generating the key pair
+    spec = DilithiumParameterSpec.LEVEL2  # Assuming LEVEL2 is a valid spec and accessible
 
-# Start the JVM with the specified path
-jpype.startJVM(classpath=classpath)
+    # Generate key pair
+    seed = jpype.JArray(jpype.JByte)(32)  # Example seed, assuming 32 bytes are suitable
+    key_pair = Dilithium.generateKeyPair(spec, seed)
+    
+    public_key = key_pair.getPublic()
+    private_key = key_pair.getPrivate()
+    print(f"Public key: {public_key}")
+    print(f"Secret key: {private_key}")
 
-# Import and use your Java wrapper
-from dilithium.DilithiumWrapper import DilithiumWrapper
+    # Sign message
+    message = "Hello, World!".encode("utf-8")  # Message needs to be bytes
+    signature = Dilithium.sign(private_key, message)
+    print(f"Signature: {signature}")
 
-# Create an instance of DilithiumWrapper
-wrapper = DilithiumWrapper()
+    # Verify signature
+    is_valid = Dilithium.verify(public_key, signature, message)
+    print(f"Is valid: {is_valid}")
 
-# Example usage
-message = b"Hello, Dilithium!"
-signature = wrapper.sign(message)
-verification = wrapper.verify(message, signature)
-print(f"Verification result: {verification}")
+    # Modify message
+    altered_message = "Hello, World?".encode("utf-8")
+    is_altered_valid = Dilithium.verify(public_key, signature, altered_message)
+    print(f"Is altered message valid: {is_altered_valid}")
 
-# Shutdown the JVM
-jpype.shutdownJVM()
+except Exception as e:
+    print(f"An error occurred: {e}")
+    
+finally:
+    # Shutdown JVM
+    jpype.shutdownJVM()

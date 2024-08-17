@@ -99,7 +99,13 @@ export JAVA_HOME=`/usr/libexec/java_home -v 11`
 export PATH=$JAVA_HOME/bin:$PATH
 
 ```
+7. 
+```
+cd dilithium-java
+mvn clean install
 
+
+```
 
 6. Install requirements.txt
 ```
