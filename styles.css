@@ -58,25 +58,48 @@ footer {
     border-top: 1px solid #d1d0d0;
 }
 
+/* Responsive adjustments for screens smaller than 768px (mobile devices) */
 @media (max-width: 768px) {
     article {
         padding: 0 15px;
     }
 
     h1 {
-        font-size: 24px;
+        font-size: 24px; /* Smaller heading size for mobile */
     }
 
     p {
-        font-size: 16px;
+        font-size: 16px; /* Smaller paragraph text for mobile */
+    }
+
+    .shadow-box {
+        padding: 15px; /* Adjust shadow box padding for mobile */
+    }
+
+    header {
+        padding: 50px 0; /* Adjust header padding for mobile */
+    }
+
+    footer {
+        padding: 15px 0; /* Adjust footer padding for mobile */
+    }
+
+    .intro-image {
+        max-width: 100%; /* Ensures the image scales within its container */
+        margin: 10px 0; /* Centers the image with margin above and below */
+        float: none; /* Removes float on smaller screens */
+        margin-left: 0; /* Resets margins */
+        margin-right: 0;
     }
 }
+
+/* Image styling */
 .intro-image {
     max-width: 110%; /* Ensures the image scales within its container */
     height: auto; /* Maintains the aspect ratio */
     float: left; /* Floats the image to the left of the text */
     margin-right: 10px; /* Adds space between the image and the text */
-    margin-left: -5px; /* Adds space between the image and the left edge of the container */;
+    margin-left: -5px; /* Adds space between the image and the left edge of the container */
     margin-bottom: 10px; /* Adds space below the image */
     border-radius: 8px; /* Adds rounded corners to the image */
 }
