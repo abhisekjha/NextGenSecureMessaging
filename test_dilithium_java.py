@@ -1,50 +1,64 @@
 import jpype
 import jpype.imports
 from jpype.types import *
-from jpype import JClass
+from jpype import JClass, JPackage
 
-# Ensure you specify the correct path to the .jar file that contains the Dilithium implementation
+
 jar_path = "/Users/abhisekjha/MyFolder/Github_Projects/NextGenSecureMessaging/dilithium-java/target/dilithium-java-0.0.1-SNAPSHOT.jar"
 
+
+bouncy_castle_jar_path = "/bcprov-jdk15on-VERSION.jar"
+
 try:
-    # Start JVM
-    jpype.startJVM(jpype.getDefaultJVMPath(), "-ea", f"-Djava.class.path={jar_path}")
     
-    # Import Java classes directly related to the cryptography features
-    Dilithium = JClass("net.thiim.dilithium.impl.Dilithium")
-    DilithiumParameterSpec = JClass("net.thiim.dilithium.interfaces.DilithiumParameterSpec")
-    KeyPair = JClass("java.security.KeyPair")
+    jpype.startJVM(jpype.getDefaultJVMPath(), "-ea", f"-Djava.class.path={jar_path}:{bouncy_castle_jar_path}")
+
+    
+    from java.security import Security
+    DilithiumProvider = JClass("net.thiim.dilithium.provider.DilithiumProvider")
+    Security.addProvider(DilithiumProvider())
+
+    
+    KeyPairGenerator = JClass("java.security.KeyPairGenerator")
     Signature = JClass("java.security.Signature")
+    DilithiumParameterSpec = JClass("net.thiim.dilithium.interfaces.DilithiumParameterSpec")
 
-    # Assume that we need a specification for generating the key pair
-    spec = DilithiumParameterSpec.LEVEL2  # Assuming LEVEL2 is a valid spec and accessible
-
-    # Generate key pair
-    seed = jpype.JArray(jpype.JByte)(32)  # Example seed, assuming 32 bytes are suitable
-    key_pair = Dilithium.generateKeyPair(spec, seed)
     
+    spec = DilithiumParameterSpec.LEVEL2  # Use LEVEL2 
+
+    
+    kpg = KeyPairGenerator.getInstance("Dilithium")
+    kpg.initialize(spec)
+    key_pair = kpg.generateKeyPair()
+
     public_key = key_pair.getPublic()
     private_key = key_pair.getPrivate()
     print(f"Public key: {public_key}")
     print(f"Secret key: {private_key}")
 
-    # Sign message
-    message = "Hello, World!".encode("utf-8")  # Message needs to be bytes
-    signature = Dilithium.sign(private_key, message)
-    print(f"Signature: {signature}")
+    # Sign a message
+    message = "Hello, World!".encode("utf-8")  
+    signature = Signature.getInstance("Dilithium")
+    signature.initSign(private_key)
+    signature.update(message)
+    sig_bytes = signature.sign()
+    print(f"Signature: {sig_bytes}")
 
-    # Verify signature
-    is_valid = Dilithium.verify(public_key, signature, message)
+    # Verify the signature
+    verifier = Signature.getInstance("Dilithium")
+    verifier.initVerify(public_key)
+    verifier.update(message)
+    is_valid = verifier.verify(sig_bytes)
     print(f"Is valid: {is_valid}")
 
-    # Modify message
+    # Modify the message and verify the signature again to check robustness against tampering
     altered_message = "Hello, World?".encode("utf-8")
-    is_altered_valid = Dilithium.verify(public_key, signature, altered_message)
+    verifier.update(altered_message)
+    is_altered_valid = verifier.verify(sig_bytes)
     print(f"Is altered message valid: {is_altered_valid}")
 
 except Exception as e:
     print(f"An error occurred: {e}")
-    
 finally:
-    # Shutdown JVM
+   
     jpype.shutdownJVM()
