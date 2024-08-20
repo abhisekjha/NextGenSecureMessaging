@@ -1,4 +1,10 @@
-from dilithium.src.dilithium_py.dilithium import Dilithium2
+import os
+import sys
+
+# Adjust the Python path to include the src directory
+sys.path.append(os.path.join(os.path.dirname(__file__), 'dilithium/src'))
+
+from dilithium_py.dilithium import Dilithium2
 
 # Step 1: Generate a key pair
 pk, sk = Dilithium2.keygen()
