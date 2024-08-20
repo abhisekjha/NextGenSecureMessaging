@@ -66,4 +66,4 @@ make
 
 ## Acknowledgements
 
-I would like to thank the [pyky](https://github.com/asdfjkl/pyky) repository and [dilithium-java](https://github.com/mthiim/dilithium-java) for providing the implementation of the Kyber cryptographic algorithm and Dilithium Implementation, which was used in this project.
+I would like to thank the [pyky](https://github.com/asdfjkl/pyky) repository and [dilithium-py](https://github.com/abhisekjha/NextGenSecureMessaging) for providing the implementation of the Kyber cryptographic algorithm and Dilithium Implementation, which was used in this project.
