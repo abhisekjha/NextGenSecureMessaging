@@ -1,6 +1,6 @@
 # Makefile
 
-all: script1 script2 script3 script4 script5
+all: script1 script2 script3 script4 script5 script6
 
 script1:
 	python3 tests/test_encryption.py
@@ -16,3 +16,6 @@ script4:
 
 script5:
 	python3 tests/test_pqc_multipath.py
+
+script6:
+	python3 tests/test_dilithium.py

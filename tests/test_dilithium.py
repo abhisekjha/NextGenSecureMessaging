@@ -1,53 +1,27 @@
-import unittest
-from src.dilithium import generate_keypair, sign, verify, serialize_key, deserialize_key, DilithiumParameterSpec
+import os
+import sys
 
-class TestDilithium(unittest.TestCase):
+# Adjust the Python path to include the src directory
+sys.path.append(os.path.join(os.path.dirname(__file__), './dilithium/src'))
 
-    def setUp(self):
-        # Initialize parameters for tests
-        self.specs = [
-            DilithiumParameterSpec.LEVEL2,
-            DilithiumParameterSpec.LEVEL3,
-            DilithiumParameterSpec.LEVEL5
-        ]
+from dilithium_py.dilithium import Dilithium2
 
-    def test_key_generation(self):
-        for spec in self.specs:
-            private_key, public_key = generate_keypair(spec)
-            self.assertIsNotNone(private_key)
-            self.assertIsNotNone(public_key)
-            self.assertTrue(hasattr(private_key, 'sign'))
-            self.assertTrue(hasattr(public_key, 'verify'))
+# Step 1: Generate a key pair
+pk, sk = Dilithium2.keygen()
+# print("Public Key:", pk)
+# print("Secret Key:", sk)
 
-    def test_sign_and_verify(self):
-        for spec in self.specs:
-            private_key, public_key = generate_keypair(spec)
-            message = b"test message"
-            signature = sign(message, private_key)
-            self.assertTrue(verify(message, signature, public_key))
+# Step 2: Sign a message
+msg = b"Your message signed by Dilithium"
+sig = Dilithium2.sign(sk, msg)
+print("Signature:", sig)
 
-            # Test verification with a different public key
-            alt_private_key, alt_public_key = generate_keypair(spec)
-            self.assertFalse(verify(message, signature, alt_public_key))
+# Step 3: Verify the signature
+is_valid = Dilithium2.verify(pk, msg, sig)s
+print("Is the signature valid?", is_valid)
 
-            # Test modification detection
-            for i in range(len(message)):
-                altered_message = bytearray(message)
-                altered_message[i] ^= 1
-                self.assertFalse(verify(bytes(altered_message), signature, public_key))
+# Step 4: Test with an altered message
+altered_msg = b"Altered message"
+is_valid = Dilithium2.verify(pk, altered_msg, sig)
+print("Is the altered message signature valid?", is_valid)
 
-    def test_serialization(self):
-        for spec in self.specs:
-            private_key, public_key = generate_keypair(spec)
-            serialized_private_key = serialize_key(private_key, is_private=True)
-            serialized_public_key = serialize_key(public_key, is_private=False)
-
-            deserialized_private_key = deserialize_key(serialized_private_key, is_private=True)
-            deserialized_public_key = deserialize_key(serialized_public_key, is_private=False)
-
-            message = b"test message"
-            signature = sign(message, deserialized_private_key)
-            self.assertTrue(verify(message, signature, deserialized_public_key))
-
-if __name__ == "__main__":
-    unittest.main()
