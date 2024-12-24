@@ -1,7 +1,6 @@
 import os
 import sys
 
-# Adjust the Python path to include the src directory
 sys.path.append(os.path.join(os.path.dirname(__file__), '../dilithium/src'))
 
 from dilithium_py.dilithium import Dilithium2
@@ -20,7 +19,7 @@ print("Signature:", sig)
 is_valid = Dilithium2.verify(pk, msg, sig)
 print("Is the signature valid?", is_valid)
 
-# Step 4: Test with an altered message
+# Step 4: Test with an altered message, the signature should be invalid as the message has been altered after signing with the secret key
 altered_msg = b"Altered message"
 is_valid = Dilithium2.verify(pk, altered_msg, sig)
 print("Is the altered message signature valid?", is_valid)
