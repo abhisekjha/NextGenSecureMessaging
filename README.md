@@ -27,7 +27,7 @@ https://github.com/asdfjkl/pyky.git
 
 4. Set and verify Pythonpath:
 ``` sh
-export PYTHONPATH=/path/to/pqc_aes_multipath:/path/to/pqc_aes_multipath/pyky:/path/to/pqc_aes_multipath/dilithium-java
+export PYTHONPATH=/path/to/NextGenSecureMessaging:/path/to/NextGenSecureMessaging/pyky:/path/to/NextGenSecureMessaging/dilithium-java
 echo $PYTHONPATH
 ```
 
