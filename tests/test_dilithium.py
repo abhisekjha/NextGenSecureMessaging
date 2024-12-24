@@ -17,7 +17,7 @@ sig = Dilithium2.sign(sk, msg)
 print("Signature:", sig)
 
 # Step 3: Verify the signature
-is_valid = Dilithium2.verify(pk, msg, sig)s
+is_valid = Dilithium2.verify(pk, msg, sig)
 print("Is the signature valid?", is_valid)
 
 # Step 4: Test with an altered message
