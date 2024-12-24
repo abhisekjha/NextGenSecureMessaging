@@ -2,7 +2,7 @@ import os
 import sys
 
 # Adjust the Python path to include the src directory
-sys.path.append(os.path.join(os.path.dirname(__file__), './dilithium/src'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '../dilithium/src'))
 
 from dilithium_py.dilithium import Dilithium2
 
