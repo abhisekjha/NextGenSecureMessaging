@@ -19,7 +19,7 @@ setup(
     },
     author='Abhisek Jha',
     author_email='abhisekjha2020@gmail.com',
-    description='A secure messaging system using AES-256 and Kyber',
+    description='A secure messaging system using AES-256 and Kyber and Dilithium post-quantum cryptographic algorithms',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/abhisekjha/pqc_aes_multipath',

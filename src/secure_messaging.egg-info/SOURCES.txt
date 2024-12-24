@@ -1,3 +1,4 @@
+LICENSE
 README.md
 setup.py
 src/secure_messaging.egg-info/PKG-INFO
@@ -7,6 +8,8 @@ src/secure_messaging.egg-info/entry_points.txt
 src/secure_messaging.egg-info/requires.txt
 src/secure_messaging.egg-info/top_level.txt
 tests/test_decryption.py
+tests/test_dilithium.py
 tests/test_encryption.py
-tests/test_file_utils.py
-tests/test_key_management.py
+tests/test_key_generation.py
+tests/test_main.py
+tests/test_pqc_multipath.py

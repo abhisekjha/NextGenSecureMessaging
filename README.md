@@ -24,7 +24,7 @@ cd pqc_aes_multipath
 https://github.com/asdfjkl/pyky.git
 ```
 
-4. git clone `Dilithium`
+4. git clone `Dilithium` and rename it to `dilithium`
 ```bash
 https://github.com/GiacomoPope/dilithium-py
 ```
