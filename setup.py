@@ -10,6 +10,7 @@ setup(
         'pqcrypto',
         'pycryptodome',
         'pyky', 
+        
     ],
     entry_points={
         'console_scripts': [
