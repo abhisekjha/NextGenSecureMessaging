@@ -24,42 +24,24 @@ cd pqc_aes_multipath
 https://github.com/asdfjkl/pyky.git
 ```
 
+4. git clone `Dilithium`
+```bash
+https://github.com/GiacomoPope/dilithium-py
+```
 
-4. Set and verify Pythonpath:
+
+5. Set and verify Pythonpath:
 ``` sh
-export PYTHONPATH=/path/to/NextGenSecureMessaging:/path/to/NextGenSecureMessaging/pyky:/path/to/NextGenSecureMessaging/dilithium-java
+export PYTHONPATH=/path/to/NextGenSecureMessaging:/path/to/NextGenSecureMessaging/pyky:/path/to/NextGenSecureMessaging/dilithium
 echo $PYTHONPATH
 ```
 
-5. Set the JAVA_HOME to other version()
-```sh
-export JAVA_HOME=`/usr/libexec/java_home -v 11`
-export PATH=$JAVA_HOME/bin:$PATH
-```
 
-6. Build the dilithium project:
-```cd dilithium-java
-mvn clean install
-```
-
-7. Set Java environment for JDK 8 and build with Gradle:
-```sh
-/usr/libexec/java_home -v 1.8
-export BC_JDK8=/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home
-export JAVA_HOME=$BC_JDK8
-export PATH=$JAVA_HOME/bin:$PATH
-
-java -version
-./gradlew clean
-./gradlew build --refresh-dependencies
-
-```
-
-8. Install requirements.txt
+6. Install requirements.txt
 ```
 pip install -r requirements.txt
 ```
-8. Run test cases using make
+7. Run test cases using make
 ```
 make
 ```
